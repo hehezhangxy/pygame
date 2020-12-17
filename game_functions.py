@@ -45,7 +45,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets: Group()):
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
-    aliens.blitme()
+    aliens.draw(screen)
     pygame.display.flip()
 
 
@@ -63,6 +63,8 @@ def creat_fleet(ai_settings: Settings, screen: pygame.Surface, aliens):
     number_aliens_x = int(aviliable_space_x / (2 * alien_with))
 
     for alien_number in range(number_aliens_x):
+        alien = Alien(ai_settings, screen)
         alien.x = alien_with + 2 * alien_with * alien_number
         alien.rect.x = alien.x
         aliens.add(alien)
+
