@@ -14,15 +14,17 @@ class Ship:
 
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+        self.center = float(self.rect.centerx)
 
         self.moveing_right = False
         self.moveing_left = False
 
     def update(self):
-        if self.moveing_right:
-            self.rect.centerx += 1
-        if self.moveing_left:
-            self.rect.centerx -= 1
+        if self.moveing_right and self.rect.right < self.screen_rect.right:
+            self.center += self.ai_settings.ship_speed_factor
+        if self.moveing_left and self.rect.left > 0:
+            self.center -= self.ai_settings.ship_speed_factor
+        self.rect.centerx = self.center
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
